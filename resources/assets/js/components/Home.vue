@@ -3,11 +3,15 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card card-default">
-                    <div class="card-header">Home Page</div>
+                    <div class="card-header">文章首页列表</div>
 
                     <div class="card-body">
-                       Home page content  
+                       <div v-for="post in posts" :key="post.id" class="bs-callout bs-callout-danger">
+                            <h4><router-link :to="{ name:'post',params:{ id: post.id} }">{{post.title}}</router-link></h4>
+                            <p>{{post.body}}</p>
+                       </div>
                     </div>
+                       
                 </div>
             </div>
         </div>
@@ -17,7 +21,15 @@
 <script>
     export default {
         mounted() {
-            console.log('Component mounted.')
+            axios.get('/api/posts').then(response => {
+                this.posts = response.data.data
+
+            })
+        },
+        data(){
+            return {
+                posts:[]
+            }
         }
     }
 </script>

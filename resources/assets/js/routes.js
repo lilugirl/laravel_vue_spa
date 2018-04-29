@@ -9,6 +9,11 @@ let routes = [
         path : '/about',
         component : require('./components/About')
     },
+    {
+        path : '/posts/:id',
+        name : 'post',
+        component : require('./components/Post')
+    },
 ]
 
 export default new VueRouter({
